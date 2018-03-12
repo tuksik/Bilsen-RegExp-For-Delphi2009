@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{6E091974-B5BA-460B-860D-C1023A8E79D1}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DFTables.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="PCRE.cbproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DFTables">
+			<MSBuild Projects="DFTables.cbproj"/>
+		</Target>
+		<Target Name="DFTables:Clean">
+			<MSBuild Targets="Clean" Projects="DFTables.cbproj"/>
+		</Target>
+		<Target Name="DFTables:Make">
+			<MSBuild Targets="Make" Projects="DFTables.cbproj"/>
+		</Target>
+		<Target Name="PCRE">
+			<MSBuild Projects="PCRE.cbproj"/>
+		</Target>
+		<Target Name="PCRE:Clean">
+			<MSBuild Targets="Clean" Projects="PCRE.cbproj"/>
+		</Target>
+		<Target Name="PCRE:Make">
+			<MSBuild Targets="Make" Projects="PCRE.cbproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DFTables;PCRE"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DFTables:Clean;PCRE:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DFTables:Make;PCRE:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

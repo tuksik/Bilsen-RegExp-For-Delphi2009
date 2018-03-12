@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{C92F9B5E-06F6-4F06-9BF7-E1FE66B54925}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="RegExTest.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="BuildTrials\BuildTrials.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="RegExTest">
+			<MSBuild Projects="RegExTest.dproj"/>
+		</Target>
+		<Target Name="RegExTest:Clean">
+			<MSBuild Targets="Clean" Projects="RegExTest.dproj"/>
+		</Target>
+		<Target Name="RegExTest:Make">
+			<MSBuild Targets="Make" Projects="RegExTest.dproj"/>
+		</Target>
+		<Target Name="BuildTrials">
+			<MSBuild Projects="BuildTrials\BuildTrials.dproj"/>
+		</Target>
+		<Target Name="BuildTrials:Clean">
+			<MSBuild Targets="Clean" Projects="BuildTrials\BuildTrials.dproj"/>
+		</Target>
+		<Target Name="BuildTrials:Make">
+			<MSBuild Targets="Make" Projects="BuildTrials\BuildTrials.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="RegExTest;BuildTrials"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="RegExTest:Clean;BuildTrials:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="RegExTest:Make;BuildTrials:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
